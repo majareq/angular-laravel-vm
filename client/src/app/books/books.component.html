@@ -1,0 +1,29 @@
+
+<form class="form" (submit)="add(BookTitle.value); BookTitle.value=''">
+    <div class="form-group">
+        <input #BookTitle type="text" class="form-control" placeholder="Tytuł książki" />
+    </div>
+
+    <input type="submit" value="Dodaj" class="btn btn-success btn-lg btn-block" />
+
+</form>
+
+<table class="table">
+    <tr *ngFor="let book of books">
+        <td class="text-left">
+            <a (click)="edit(book)">
+                <span *ngIf="book!==editBook">{{book.title}}</span>
+                <input *ngIf="book===editBook" [(ngModel)]="book.title" (blur)="update()" keyup.enter="update()">
+            </a>
+    </td>
+    <td class="text-right">
+        <button class="btn btn-danger" (click)="delete(book)">
+            Skasuj
+        </button>
+    </td>
+    </tr>
+</table>
+
+<div class="card card-body bg-light text-center">
+    <span class="small">kliknij w pozycję, aby edytować</span>
+</div>
