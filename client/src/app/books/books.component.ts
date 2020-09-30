@@ -22,14 +22,18 @@ export class BooksComponent implements OnInit {
         this.bookService.getBooks().subscribe(books => (this.books = books));
     }
 
-    add(title: string): void {
+    add(title: string, category: string): void {
         this.editBook = undefined;
         title = title.trim();
+        category = category.trim();
         if (!title) {
             return;
         }
+        if (!category) {
+            return;
+        }
 
-        const newBook: Book = { title } as Book;
+        const newBook: Book = { title, category } as Book;
         this.bookService.addBook(newBook).subscribe(book => this.books.push(book));
     }
 
